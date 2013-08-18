@@ -31,7 +31,6 @@ namespace Snake
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.gameBoard = new System.Windows.Forms.Panel();
             this.title = new System.Windows.Forms.Label();
             this.insane = new System.Windows.Forms.Button();
             this.hard = new System.Windows.Forms.Button();
@@ -39,23 +38,7 @@ namespace Snake
             this.easy = new System.Windows.Forms.Button();
             this.newGame = new System.Windows.Forms.Button();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
-            this.gameBoard.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // gameBoard
-            // 
-            this.gameBoard.Controls.Add(this.title);
-            this.gameBoard.Controls.Add(this.insane);
-            this.gameBoard.Controls.Add(this.hard);
-            this.gameBoard.Controls.Add(this.medium);
-            this.gameBoard.Controls.Add(this.easy);
-            this.gameBoard.Controls.Add(this.newGame);
-            this.gameBoard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gameBoard.Location = new System.Drawing.Point(0, 0);
-            this.gameBoard.Name = "gameBoard";
-            this.gameBoard.Size = new System.Drawing.Size(600, 400);
-            this.gameBoard.TabIndex = 0;
-            this.gameBoard.Paint += new System.Windows.Forms.PaintEventHandler(this.GameBoard_Paint);
             // 
             // title
             // 
@@ -126,21 +109,25 @@ namespace Snake
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 400);
-            this.Controls.Add(this.gameBoard);
+            this.Controls.Add(this.title);
+            this.Controls.Add(this.insane);
+            this.Controls.Add(this.hard);
+            this.Controls.Add(this.medium);
+            this.Controls.Add(this.easy);
+            this.Controls.Add(this.newGame);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.Name = "SnakeGame";
             this.Text = "BZow\'s Snake";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SnakeGame_KeyDown);
-            this.gameBoard.ResumeLayout(false);
-            this.gameBoard.PerformLayout();
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameBoard_Paint);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
-        #endregion      
-
-        private System.Windows.Forms.Panel gameBoard;
+        #endregion     
+ 
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Button insane;
         private System.Windows.Forms.Button hard;

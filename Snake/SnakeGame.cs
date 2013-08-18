@@ -46,9 +46,10 @@ namespace Snake
         {
             this.InitializeComponent();
             this.difficulty = GameDifficulty.Medium;
+            this.DoubleBuffered = true;
             this.gameTimer.Interval = 1000;
             this.state = GameState.Menu;
-            this.gameBoard.Invalidate();
+            this.Invalidate();
         }
 
         /// <summary>
@@ -83,14 +84,14 @@ namespace Snake
             if (SnakeUtility.WillEatFood(this.snake, this.food))
             {
                 this.snake.Grow(this.food.Position);
-                this.food = new FoodBlock(this.gameBoard.Width / BaseBlock.StandardBlockSize.Width, this.gameBoard.Height / BaseBlock.StandardBlockSize.Height);
+                this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
             }
             else
             {
                 this.snake.Move();
             }
 
-            if (SnakeUtility.HasCollidedWithSelf(this.snake) || SnakeUtility.HasHitBounds(this.snake, this.gameBoard.Width, this.gameBoard.Height))
+            if (SnakeUtility.HasCollidedWithSelf(this.snake) || SnakeUtility.HasHitBounds(this.snake, this.ClientSize.Width, this.ClientSize.Height))
             {
                 this.GameOver();
             } 
@@ -220,12 +221,12 @@ namespace Snake
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
         private void NewGame_Click(object sender, EventArgs e)
         {
-            this.gameBoard.Controls.Clear();
+            this.Controls.Clear();
             this.snake = new Snake(SnakeGame.DefaultSnakeLength);
-            this.food = new FoodBlock(this.gameBoard.Width / BaseBlock.StandardBlockSize.Width, this.gameBoard.Height / BaseBlock.StandardBlockSize.Height);
+            this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
             this.state = GameState.Playing;
             this.ApplyDifficulty();
-            this.gameBoard.Invalidate();
+            this.Invalidate();
             this.gameTimer.Enabled = true;
         }
 
@@ -237,7 +238,7 @@ namespace Snake
         private void GameTimer_Tick(object sender, EventArgs e)
         {
             this.GameLoop();
-            this.gameBoard.Invalidate();
+            this.Invalidate();
         }
 
         /// <summary>

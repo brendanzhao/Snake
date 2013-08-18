@@ -2,8 +2,7 @@ Snake
 =========
 
 This is the classic Snake game I've decided to recreate during my spare time.<br />
-This game is very basic and is meant to be written in with object oriented design.<br />
-The code is fully stylecopped.
+This game is very basic and was purposefully written in an extremely simple manner.<br />
 
 Code Format TODO:<br />
 Subclass Panel to enable DoubleBuffered to stop the flickering.<br />

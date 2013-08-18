@@ -8,6 +8,7 @@ Refactor TODO:<br />
 Subclass Panel to enable DoubleBuffered to stop the flickering.<br />
 Remove logic from event handlers and create separate methods for them.<br />
 Have Snake inherit from Collection instead of having a Property representing an Array of SnakeBlocks.<br />
+Everytime the Snake grows, the array of SnakeBlocks is converted to a Collection, a block is added to it and then it's converted back into an array. BAD.<br />
 Re-order methods to be in alphabetical order.
 
 Features TODO:<br />

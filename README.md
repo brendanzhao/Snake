@@ -2,17 +2,17 @@ Snake
 =========
 
 This is the classic Snake game I've decided to recreate during my spare time.<br />
-This game is very basic and was purposefully written in an extremely simple manner.<br />
+This game is very basic.<br />
 
 Refactor TODO:<br />
-Remove logic from event handlers and create separate methods for them.<br />
-Have Snake inherit from Collection instead of having a Property representing an Array of SnakeBlocks.<br />
-Everytime the Snake grows, the array of SnakeBlocks is converted to a Collection, a block is added to it and then it's converted back into an array. BAD.<br />
-Add power-ups.
+Change the snake to be stored within a linked list instead of an array.<br />
+When a food block is eaten, add a new block to the end of the snake instead of replacing the food block as a new head.<br />
+Remove direction enumeration to simplify code with a simple x and y direction variable to be set at -1, 0, 1.
 
 Features TODO:<br />
-Pause Functionality.<br />
-End Game Functionality.<br />
-Add Obstacles.<br />
+Pause functionality.<br />
+End game Functionality.<br />
+Add obstacles.<br />
 Place food blocks in harder to reach places based on difficulty.<br />
 Better graphics.
+Add power-ups.

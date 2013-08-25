@@ -21,11 +21,11 @@ namespace Snake
         /// <param name="length">An <see cref="int"/> specifying the default length of the Snake.</param>
         public Snake(int length)
         {
-            this.SnakeBlocks = new SnakeBlock[length];
+            this.SnakeBlocks = new LinkedList<SnakeBlock>();
 
             for (int i = 0; i < length; i++)
             {
-                this.SnakeBlocks[length - 1 - i] = new SnakeBlock(new Point(1, 1 + i));
+                this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(1, 1 + i)));
             }
 
             this.Direction = Direction.Down;
@@ -43,7 +43,7 @@ namespace Snake
         /// <summary>
         /// Gets or sets the SnakeBlocks of the <see cref="Snake"/>.
         /// </summary>
-        public SnakeBlock[] SnakeBlocks
+        public LinkedList<SnakeBlock> SnakeBlocks
         {
             get;
             set;
@@ -55,12 +55,7 @@ namespace Snake
         /// <param name="snakeBlockLocation">A <see cref="Point"/> representing the location of the <see cref="SnakeBlock"/> to be added to the <see cref="Snake"/>.</param>
         public void Grow(Point snakeBlockLocation)
         {
-            List<SnakeBlock> snakeBlockList;
-
-            snakeBlockList = this.SnakeBlocks.ToList();
-            snakeBlockList.Insert(0, new SnakeBlock(snakeBlockLocation));
-
-            this.SnakeBlocks = snakeBlockList.ToArray();
+            this.SnakeBlocks.AddFirst(new SnakeBlock(snakeBlockLocation));
         }
 
         /// <summary>
@@ -71,41 +66,22 @@ namespace Snake
             switch (this.Direction)
             {
                 case Direction.Down:
-                    for (int i = this.SnakeBlocks.Length - 1; i > 0; i--)
-                    {
-                        this.SnakeBlocks[i].Position = this.SnakeBlocks[i - 1].Position;
-                    }
-
-                    this.SnakeBlocks[0].Position = new Point(this.SnakeBlocks[0].Position.X, this.SnakeBlocks[0].Position.Y + 1);
-
+                    this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X, this.SnakeBlocks.First.Value.Position.Y + 1)));
                     break;
                 case Direction.Left:
-                    for (int i = this.SnakeBlocks.Length - 1; i > 0; i--)
-                    {
-                        this.SnakeBlocks[i].Position = this.SnakeBlocks[i - 1].Position;
-                    }
-
-                    this.SnakeBlocks[0].Position = new Point(this.SnakeBlocks[0].Position.X - 1, this.SnakeBlocks[0].Position.Y);
+                    this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X - 1, this.SnakeBlocks.First.Value.Position.Y)));
                     break;
                 case Direction.Right:
-                    for (int i = this.SnakeBlocks.Length - 1; i > 0; i--)
-                    {
-                        this.SnakeBlocks[i].Position = this.SnakeBlocks[i - 1].Position;
-                    }
-
-                    this.SnakeBlocks[0].Position = new Point(this.SnakeBlocks[0].Position.X + 1, this.SnakeBlocks[0].Position.Y);
+                    this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X + 1, this.SnakeBlocks.First.Value.Position.Y)));
                     break;
                 case Direction.Up:
-                    for (int i = this.SnakeBlocks.Length - 1; i > 0; i--)
-                    {
-                        this.SnakeBlocks[i].Position = this.SnakeBlocks[i - 1].Position;
-                    }
-
-                    this.SnakeBlocks[0].Position = new Point(this.SnakeBlocks[0].Position.X, this.SnakeBlocks[0].Position.Y + -1);
+                    this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X, this.SnakeBlocks.First.Value.Position.Y - 1)));
                     break;
                 default:
                     break;
             }
+
+            this.SnakeBlocks.RemoveLast();
         }
 
         /// <summary>

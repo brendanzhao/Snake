@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Snake
 {
+    using System.Collections.Generic;
     using System.Drawing;
 
     /// <summary>
@@ -19,12 +20,23 @@ namespace Snake
         /// <returns>true if the snake has collided with itself; otherwise false.</returns>
         public static bool HasCollidedWithSelf(Snake snake)
         {
-            // The position of the head of the snake.
-            Point head = snake.SnakeBlocks[0].Position;
-
-            for (int i = 3; i < snake.SnakeBlocks.Length; i++)
+            // The snake cannot collide with itself if there are only 4 snake blocks.
+            if (snake.SnakeBlocks.Count <= 4)
             {
-                if (head.X == snake.SnakeBlocks[i].Position.X && head.Y == snake.SnakeBlocks[i].Position.Y)
+                return false;
+            }
+
+            // The position of the head of the snake.
+            Point snakeHead = snake.SnakeBlocks.First.Value.Position;
+
+            // The current block of the snake being tested for collision.
+            LinkedListNode<SnakeBlock> current = snake.SnakeBlocks.First.Next.Next.Next;
+
+            while (current.Next != null)
+            {
+                current = current.Next;
+
+                if (snakeHead.X == current.Value.Position.X && snakeHead.Y == current.Value.Position.Y)
                 {
                     return true;
                 }
@@ -42,10 +54,8 @@ namespace Snake
         /// <returns>true if the snake has hit the boundary of the game; otherwise false.</returns>
         public static bool HasHitBounds(Snake snake, int horizontalBound, int verticalBound)
         {
-            // Represents the location of the head of the snake to be checked for collision with the boundaries.
-            Point snakeHead;
-
-            snakeHead = snake.SnakeBlocks[0].Position;
+            // The position of the head of the snake.
+            Point snakeHead = snake.SnakeBlocks.First.Value.Position;
 
             if (snakeHead.X < 0 || snakeHead.Y < 0 || (snakeHead.X * BaseBlock.StandardBlockSize.Width) >= horizontalBound || (snakeHead.Y * BaseBlock.StandardBlockSize.Height) >= verticalBound)
             {
@@ -65,31 +75,34 @@ namespace Snake
         /// <returns>true if the snake will hit a food block on it's next move; otherwise false.</returns>
         public static bool WillEatFood(Snake snake, FoodBlock food)
         {
+            // The position of the head of the snake.
+            Point snakeHead = snake.SnakeBlocks.First.Value.Position;
+
             switch (snake.Direction)
             {
                 case Direction.Down:
-                    if (snake.SnakeBlocks[0].Position.X == food.Position.X && (snake.SnakeBlocks[0].Position.Y + 1) == food.Position.Y)
+                    if (snakeHead.X == food.Position.X && (snakeHead.Y + 1) == food.Position.Y)
                     {
                         return true;
                     }
 
                     break;
                 case Direction.Left:
-                    if (snake.SnakeBlocks[0].Position.X - 1 == food.Position.X && snake.SnakeBlocks[0].Position.Y == food.Position.Y)
+                    if (snakeHead.X - 1 == food.Position.X && snakeHead.Y == food.Position.Y)
                     {
                         return true;
                     }
 
                     break;
                 case Direction.Right:
-                    if (snake.SnakeBlocks[0].Position.X + 1 == food.Position.X && snake.SnakeBlocks[0].Position.Y == food.Position.Y)
+                    if (snakeHead.X + 1 == food.Position.X && snakeHead.Y == food.Position.Y)
                     {
                         return true;
                     }
 
                     break;
                 case Direction.Up:
-                    if (snake.SnakeBlocks[0].Position.X == food.Position.X && (snake.SnakeBlocks[0].Position.Y - 1) == food.Position.Y)
+                    if (snakeHead.X == food.Position.X && (snakeHead.Y - 1) == food.Position.Y)
                     {
                         return true;
                     }

@@ -25,17 +25,6 @@ namespace Snake
             {
                 this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(1, 1 + i)));
             }
-
-            this.Direction = Direction.Down;
-        }
-
-        /// <summary>
-        /// Gets or sets the Direction of the <see cref="Snake"/>.
-        /// </summary>
-        public Direction Direction
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -57,28 +46,12 @@ namespace Snake
         }
 
         /// <summary>
-        /// Moves this snake in it's current direction.
+        /// Moves this snake in a specified direction.
         /// </summary>
-        public void Move()
+        /// <param name="direction">A <see cref="Point"/> representing the direction to move the snake.</param>
+        public void Move(Point direction)
         {
-            switch (this.Direction)
-            {
-                case Direction.Down:
-                    this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X, this.SnakeBlocks.First.Value.Position.Y + 1)));
-                    break;
-                case Direction.Left:
-                    this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X - 1, this.SnakeBlocks.First.Value.Position.Y)));
-                    break;
-                case Direction.Right:
-                    this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X + 1, this.SnakeBlocks.First.Value.Position.Y)));
-                    break;
-                case Direction.Up:
-                    this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X, this.SnakeBlocks.First.Value.Position.Y - 1)));
-                    break;
-                default:
-                    break;
-            }
-
+            this.SnakeBlocks.AddFirst(new SnakeBlock(new Point(this.SnakeBlocks.First.Value.Position.X + direction.X, this.SnakeBlocks.First.Value.Position.Y + direction.Y)));
             this.SnakeBlocks.RemoveLast();
         }
 

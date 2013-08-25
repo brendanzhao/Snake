@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBlock.cs" />
-    <Compile Include="Direction.cs" />
     <Compile Include="FoodType.cs" />
     <Compile Include="FoodBlock.cs" />
     <Compile Include="GameState.cs" />

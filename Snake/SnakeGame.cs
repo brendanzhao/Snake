@@ -20,17 +20,23 @@ namespace Snake
         private const int DefaultSnakeLength = 5;
 
         /// <summary>
-        /// Represents the food block that the snake needs to eat in order to grow.
+        /// Represents the direction to move the <see cref="Snake"/>.
+        /// </summary>
+        /// <remarks>Should only ever hold values from -1 to 1.</remarks>
+        private Point direction;
+
+        /// <summary>
+        /// Represents the food block that the <see cref="Snake"/> needs to eat in order to grow.
         /// </summary>
         private FoodBlock food;
 
         /// <summary>
-        /// Represents the user controlled snake in the game.
+        /// Represents the user controlled <see cref="Snake"/> in the game.
         /// </summary>
         private Snake snake;
 
         /// <summary>
-        ///  Represents the state the game is currently at to determine what to draw on the form.
+        /// Represents the state the game is currently at to determine what to draw on the form.
         /// </summary>
         private GameState state;
 
@@ -51,14 +57,14 @@ namespace Snake
         /// </summary>
         private void GameLoop()
         {
-            if (SnakeUtility.WillEatFood(this.snake, this.food))
+            if (SnakeUtility.WillEatFood(this.snake, this.food, this.direction))
             {
                 this.snake.Grow(this.food.Position);
                 this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
             }
             else
             {
-                this.snake.Move();
+                this.snake.Move(this.direction);
             }
 
             if (SnakeUtility.HasCollidedWithSelf(this.snake) || SnakeUtility.HasHitBounds(this.snake, this.ClientSize.Width, this.ClientSize.Height))
@@ -158,6 +164,7 @@ namespace Snake
             this.Controls.Clear();
             this.snake = new Snake(SnakeGame.DefaultSnakeLength);
             this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
+            this.direction = new Point(0, 1);
             this.state = GameState.Playing;
             this.Invalidate();
             this.gameTimer.Enabled = true;
@@ -184,30 +191,34 @@ namespace Snake
             switch (e.KeyData)
             {
                 case Keys.Down:
-                    if (this.snake.Direction != Direction.Up)
+                    if (this.direction.Y != -1)
                     {
-                        this.snake.Direction = Direction.Down;
+                        this.direction.X = 0;
+                        this.direction.Y = 1;
                     }
 
                     break;
                 case Keys.Left:
-                    if (this.snake.Direction != Direction.Right)
+                    if (this.direction.X != 1)
                     {
-                        this.snake.Direction = Direction.Left;
+                        this.direction.X = -1;
+                        this.direction.Y = 0;
                     }
 
                     break;
                 case Keys.Right:
-                    if (this.snake.Direction != Direction.Left)
+                    if (this.direction.X != -1)
                     {
-                        this.snake.Direction = Direction.Right;
+                        this.direction.X = 1;
+                        this.direction.Y = 0;
                     }
 
                     break;
                 case Keys.Up:
-                    if (this.snake.Direction != Direction.Down)
+                    if (this.direction.Y != 1)
                     {
-                        this.snake.Direction = Direction.Up;
+                        this.direction.X = 0;
+                        this.direction.Y = -1;
                     }
 
                     break;

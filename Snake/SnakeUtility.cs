@@ -72,47 +72,21 @@ namespace Snake
         /// </summary>
         /// <param name="snake">A <see cref="Snake"/> being checked if it will eat a food block.</param>
         /// <param name="food">A <see cref="FoodBlock"/> being checked if it will be eaten.</param>
+        /// <param name="direction">A <see cref="Point"/> representing the direction the snake is moving.</param>
         /// <returns>true if the snake will hit a food block on it's next move; otherwise false.</returns>
-        public static bool WillEatFood(Snake snake, FoodBlock food)
+        public static bool WillEatFood(Snake snake, FoodBlock food, Point direction)
         {
             // The position of the head of the snake.
             Point snakeHead = snake.SnakeBlocks.First.Value.Position;
 
-            switch (snake.Direction)
+            if (snakeHead.X + direction.X == food.Position.X && snakeHead.Y + direction.Y == food.Position.Y)
             {
-                case Direction.Down:
-                    if (snakeHead.X == food.Position.X && (snakeHead.Y + 1) == food.Position.Y)
-                    {
-                        return true;
-                    }
-
-                    break;
-                case Direction.Left:
-                    if (snakeHead.X - 1 == food.Position.X && snakeHead.Y == food.Position.Y)
-                    {
-                        return true;
-                    }
-
-                    break;
-                case Direction.Right:
-                    if (snakeHead.X + 1 == food.Position.X && snakeHead.Y == food.Position.Y)
-                    {
-                        return true;
-                    }
-
-                    break;
-                case Direction.Up:
-                    if (snakeHead.X == food.Position.X && (snakeHead.Y - 1) == food.Position.Y)
-                    {
-                        return true;
-                    }
-
-                    break;
-                default:
-                    return false;
+                return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ This is the classic Snake game I've decided to recreate during my spare time for
 The MSDN style commenting is unncessary however I felt like complying with all StyleCop formatting for this project.<br />
 
 Bugs TODO:<br />
-All known bugs have been fixed.
+Resizing window tends to mess some things up currently.
 
 Refactor TODO:<br />
 All major refactor TODO's have been completed.
@@ -16,4 +16,5 @@ End game Functionality.<br />
 Add obstacles.<br />
 Place food blocks in harder to reach places based on difficulty.<br />
 Better graphics.<br />
-Add power-ups.
+Add power-ups.<br />
+Create a better UI.<br />

@@ -69,7 +69,6 @@ namespace Snake
             this.InitializeComponent();
             this.DoubleBuffered = true;
             this.gameTimer.Interval = 75;
-            this.gridSize = new Size(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
             this.difficultyBorder = new Rectangle(this.medium.Location.X, this.medium.Location.Y, this.medium.Size.Width, this.medium.Size.Height);
             this.state = GameState.Menu;
             this.Invalidate();
@@ -194,6 +193,7 @@ namespace Snake
         private void NewGame_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
+            this.gridSize = new Size(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
             this.snake = new Snake(SnakeGame.DefaultSnakeLength);
             this.emptyPositions = SnakeUtility.GetEmptyBlockPositions(this.snake, this.gridSize);
             this.food = new FoodBlock(this.emptyPositions);

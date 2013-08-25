@@ -20,11 +20,6 @@ namespace Snake
         private const int DefaultSnakeLength = 5;
 
         /// <summary>
-        ///  Represents the difficulty of the game to determine how fast the snake will move.
-        /// </summary>
-        private GameDifficulty difficulty;
-
-        /// <summary>
         /// Represents the food block that the snake needs to eat in order to grow.
         /// </summary>
         private FoodBlock food;
@@ -45,35 +40,10 @@ namespace Snake
         public SnakeGame()
         {
             this.InitializeComponent();
-            this.difficulty = GameDifficulty.Medium;
             this.DoubleBuffered = true;
-            this.gameTimer.Interval = 1000;
+            this.gameTimer.Interval = 75;
             this.state = GameState.Menu;
             this.Invalidate();
-        }
-
-        /// <summary>
-        /// Sets the timer interval representing how fast the snake will move depending on the selected difficulty.
-        /// </summary>
-        private void ApplyDifficulty()
-        {
-            switch (this.difficulty)
-            {
-                case GameDifficulty.Easy:
-                    this.gameTimer.Interval = 500;
-                    break;
-                case GameDifficulty.Medium:
-                    this.gameTimer.Interval = 250;
-                    break;
-                case GameDifficulty.Hard:
-                    this.gameTimer.Interval = 100;
-                    break;
-                case GameDifficulty.Insane:
-                    this.gameTimer.Interval = 25;
-                    break;
-                default:
-                    throw new ArgumentException("The Interval of the timer should have been set");
-            }
         }
 
         /// <summary>
@@ -106,43 +76,13 @@ namespace Snake
         }
 
         /// <summary>
-        /// Outlines the currently selected difficulty on the menu.
-        /// </summary>
-        /// <param name="g">A <see cref="Graphics"/> object which will be drawing to the Snake game.</param>
-        private void OutlineCurrentDifficulty(Graphics g)
-        {
-            // Used to define the color that will outline the currently selected difficulty.
-            Pen colorPen;
-
-            colorPen = new Pen(Color.Red);
-
-            switch (this.difficulty)
-            {
-                case GameDifficulty.Easy:
-                    g.DrawRectangle(colorPen, this.easy.Location.X, this.easy.Location.Y, this.easy.Size.Width, this.easy.Size.Height);
-                    break;
-                case GameDifficulty.Medium:
-                    g.DrawRectangle(colorPen, this.medium.Location.X, this.medium.Location.Y, this.medium.Size.Width, this.medium.Size.Height);
-                    break;
-                case GameDifficulty.Hard:
-                    g.DrawRectangle(colorPen, this.hard.Location.X, this.hard.Location.Y, this.hard.Size.Width, this.hard.Size.Height);
-                    break;
-                case GameDifficulty.Insane:
-                    g.DrawRectangle(colorPen, this.insane.Location.X, this.insane.Location.Y, this.insane.Size.Width, this.insane.Size.Height);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
         /// Event which sets the difficulty of the Snake game to easy.
         /// </summary>
         /// <param name="sender">An <see cref="object"/> representing the source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
         private void Easy_Click(object sender, EventArgs e)
         {
-            this.difficulty = GameDifficulty.Easy;
+            this.gameTimer.Interval = 100;
             this.Refresh();
         }
 
@@ -153,7 +93,7 @@ namespace Snake
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
         private void Medium_Click(object sender, EventArgs e)
         {
-            this.difficulty = GameDifficulty.Medium;
+            this.gameTimer.Interval = 75;
             this.Refresh();
         }
 
@@ -164,7 +104,7 @@ namespace Snake
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
         private void Hard_Click(object sender, EventArgs e)
         {
-            this.difficulty = GameDifficulty.Hard;
+            this.gameTimer.Interval = 50;
             this.Refresh();
         }
 
@@ -175,7 +115,7 @@ namespace Snake
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
         private void Insane_Click(object sender, EventArgs e)
         {
-            this.difficulty = GameDifficulty.Insane;
+            this.gameTimer.Interval = 25;
             this.Refresh();
         }
 
@@ -189,17 +129,11 @@ namespace Snake
             // Draws to the form.
             Graphics g;
 
-            // Defines the color to draw with.
-            Pen pen;
-
             g = e.Graphics;
-
-            pen = new Pen(Color.Red);
 
             switch (this.state)
             {
                 case GameState.Menu:
-                    this.OutlineCurrentDifficulty(g);
                     break;
                 case GameState.Playing:
                     this.snake.Draw(g);
@@ -225,7 +159,6 @@ namespace Snake
             this.snake = new Snake(SnakeGame.DefaultSnakeLength);
             this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
             this.state = GameState.Playing;
-            this.ApplyDifficulty();
             this.Invalidate();
             this.gameTimer.Enabled = true;
         }

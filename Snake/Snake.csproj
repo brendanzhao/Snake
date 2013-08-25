@@ -48,7 +48,6 @@
     <Compile Include="Direction.cs" />
     <Compile Include="FoodType.cs" />
     <Compile Include="FoodBlock.cs" />
-    <Compile Include="GameDifficulty.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="SnakeGame.cs">
       <SubType>Form</SubType>

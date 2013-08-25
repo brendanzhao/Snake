@@ -36,6 +36,11 @@ namespace Snake
         private FoodBlock food;
 
         /// <summary>
+        /// Represents the last direction the <see cref="Snake"/> moved in the previous tick in order to prevent moving backwards.
+        /// </summary>
+        private Point previousDirection;
+
+        /// <summary>
         /// Represents the user controlled <see cref="Snake"/> in the game.
         /// </summary>
         private Snake snake;
@@ -63,18 +68,19 @@ namespace Snake
         /// </summary>
         private void GameLoop()
         {
-            if (SnakeUtility.HasCollidedWithSelf(this.snake) || SnakeUtility.HasHitBounds(this.snake, this.ClientSize.Width, this.ClientSize.Height))
-            {
-                this.GameOver();
-            } 
-
             if (SnakeUtility.WillEatFood(this.snake, this.food, this.direction))
             {
                 this.snake.Grow(this.snake.SnakeBlocks.Last.Value);
                 this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
             }
-            
+
             this.snake.Move(this.direction);
+            this.previousDirection = this.direction;
+
+            if (SnakeUtility.HasCollidedWithSelf(this.snake) || SnakeUtility.HasHitBounds(this.snake, this.ClientSize.Width, this.ClientSize.Height))
+            {
+                this.GameOver();
+            }
         }
 
         /// <summary>
@@ -204,7 +210,7 @@ namespace Snake
             switch (e.KeyData)
             {
                 case Keys.Down:
-                    if (this.direction.Y != -1)
+                    if (this.previousDirection.Y != -1)
                     {
                         this.direction.X = 0;
                         this.direction.Y = 1;
@@ -212,7 +218,7 @@ namespace Snake
 
                     break;
                 case Keys.Left:
-                    if (this.direction.X != 1)
+                    if (this.previousDirection.X != 1)
                     {
                         this.direction.X = -1;
                         this.direction.Y = 0;
@@ -220,7 +226,7 @@ namespace Snake
 
                     break;
                 case Keys.Right:
-                    if (this.direction.X != -1)
+                    if (this.previousDirection.X != -1)
                     {
                         this.direction.X = 1;
                         this.direction.Y = 0;
@@ -228,7 +234,7 @@ namespace Snake
 
                     break;
                 case Keys.Up:
-                    if (this.direction.Y != 1)
+                    if (this.previousDirection.Y != 1)
                     {
                         this.direction.X = 0;
                         this.direction.Y = -1;

@@ -24,7 +24,7 @@ namespace Snake
         private static FoodType[] foodTypes = (FoodType[])Enum.GetValues(typeof(FoodType));
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FoodBlock"/> class with a specified FoodType and Position.
+        /// Initializes a new instance of the <see cref="FoodBlock"/> class with a specified Position and random <see cref="FoodType"/>.
         /// </summary>
         /// <param name="horizontalBound">An <see cref="int"/> representing the maximum X position to place the <see cref="FoodBlock"/>.</param>
         /// <param name="verticalBound">An <see cref="int"/> representing the maximum Y position to place the <see cref="FoodBlock"/>.</param>

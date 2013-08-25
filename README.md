@@ -16,4 +16,5 @@ End game Functionality.<br />
 Add obstacles.<br />
 Place food blocks in harder to reach places based on difficulty.<br />
 Better graphics.<br />
-Add power-ups.
+Add power-ups.<br />
+Create a better UI.<br />

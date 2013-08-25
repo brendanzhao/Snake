@@ -63,20 +63,18 @@ namespace Snake
         /// </summary>
         private void GameLoop()
         {
-            if (SnakeUtility.WillEatFood(this.snake, this.food, this.direction))
-            {
-                this.snake.Grow(this.food.Position);
-                this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
-            }
-            else
-            {
-                this.snake.Move(this.direction);
-            }
-
             if (SnakeUtility.HasCollidedWithSelf(this.snake) || SnakeUtility.HasHitBounds(this.snake, this.ClientSize.Width, this.ClientSize.Height))
             {
                 this.GameOver();
             } 
+
+            if (SnakeUtility.WillEatFood(this.snake, this.food, this.direction))
+            {
+                this.snake.Grow(this.snake.SnakeBlocks.Last.Value);
+                this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
+            }
+            
+            this.snake.Move(this.direction);
         }
 
         /// <summary>

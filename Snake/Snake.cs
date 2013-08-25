@@ -39,10 +39,10 @@ namespace Snake
         /// <summary>
         /// Increases the length of the <see cref="Snake"/> by one.
         /// </summary>
-        /// <param name="snakeBlockLocation">A <see cref="Point"/> representing the location of the <see cref="SnakeBlock"/> to be added to the <see cref="Snake"/>.</param>
-        public void Grow(Point snakeBlockLocation)
+        /// <param name="snakeBlock">A <see cref="SnakeBlock"/> representing the <see cref="SnakeBlock"/> to be added to the end of the <see cref="Snake"/>.</param>
+        public void Grow(SnakeBlock snakeBlock)
         {
-            this.SnakeBlocks.AddFirst(new SnakeBlock(snakeBlockLocation));
+            this.SnakeBlocks.AddLast(snakeBlock);
         }
 
         /// <summary>

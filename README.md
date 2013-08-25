@@ -5,7 +5,7 @@ This is the classic Snake game I've decided to recreate during my spare time for
 The MSDN style commenting is unncessary however I felt like complying with all StyleCop formatting for this project.<br />
 
 Refactor TODO:<br />
-All major refactoring TODO's have been completed.
+Move code out of some event handlers and into their own methods.
 
 Features TODO:<br />
 Pause functionality.<br />

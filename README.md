@@ -16,5 +16,4 @@ Better graphics.<br />
 Add power-ups.
 
 Bugs TODO:<br />
-The Snake is able to move backwards and thus through itself when moving very slowly. Bug is caused because the game tracks the last direction that has been pressed on the keyboard and not neccessarily the last direction the snake moved. That is, if within 1 timer tick, you press two directions, you can essentially move the snake backwards. For example: If the snake is moving up, then within a single timer tick, you press left and then down, the code will assume the last direction moved was left and will cause the snake to move from up to down in the next tick.<br />
 There is a possibility of the food block being drawn ontop of the snake. However it's very unlikely.

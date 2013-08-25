@@ -7,6 +7,7 @@ namespace Snake
 {
     using System.Collections.Generic;
     using System.Drawing;
+    using System.Windows.Forms;
 
     /// <summary>
     /// Contains methods used for calculating the logic in the Snake game.
@@ -87,6 +88,54 @@ namespace Snake
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Determines the direction to move the snake depending on the key pressed.
+        /// </summary>
+        /// <param name="previousDirection">A <see cref="Point"/> representing the direction the snake was previously moving to not allow the <see cref="Snake"/> to move backwards.</param>
+        /// <param name="key">A <see cref="Keys"/> enumeration representing the key pressed.</param>
+        /// <returns>A <see cref="Point"/> representing the new direction the <see cref="Snake"/> will move towards.</returns>
+        public static Point ChangeDirection(Point previousDirection, Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Down:
+                    if (previousDirection.Y != -1)
+                    {
+                        return new Point(0, 1);
+                    }
+
+                    break;
+                case Keys.Left:
+                    if (previousDirection.X != 1)
+                    {
+                        return new Point(-1, 0);
+                    }
+
+                    break;
+                case Keys.Right:
+                    if (previousDirection.X != -1)
+                    {
+                        return new Point(1, 0);
+                    }
+
+                    break;
+                case Keys.Up:
+                    if (previousDirection.Y != 1)
+                    {
+                        return new Point(0, -1);
+                    }
+
+                    break;
+                case Keys.Space:
+                    // TODO: Implement pause function
+                    break;
+                default:
+                    break;
+            }
+
+            return previousDirection;
         }
     }
 }

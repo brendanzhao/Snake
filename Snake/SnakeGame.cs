@@ -207,46 +207,7 @@ namespace Snake
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
         private void SnakeGame_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyData)
-            {
-                case Keys.Down:
-                    if (this.previousDirection.Y != -1)
-                    {
-                        this.direction.X = 0;
-                        this.direction.Y = 1;
-                    }
-
-                    break;
-                case Keys.Left:
-                    if (this.previousDirection.X != 1)
-                    {
-                        this.direction.X = -1;
-                        this.direction.Y = 0;
-                    }
-
-                    break;
-                case Keys.Right:
-                    if (this.previousDirection.X != -1)
-                    {
-                        this.direction.X = 1;
-                        this.direction.Y = 0;
-                    }
-
-                    break;
-                case Keys.Up:
-                    if (this.previousDirection.Y != 1)
-                    {
-                        this.direction.X = 0;
-                        this.direction.Y = -1;
-                    }
-
-                    break;
-                case Keys.Space:
-                    // TODO: Implement pause function.
-                    break;
-                default:
-                    break;
-            }
+            this.direction = SnakeUtility.ChangeDirection(this.previousDirection, e.KeyData);
         }
     }
 }

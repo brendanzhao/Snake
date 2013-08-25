@@ -58,11 +58,14 @@ namespace Snake
                 case FoodType.Apple:
                     food = Color.Red;
                     break;
-                case FoodType.Banana:
-                    food = Color.Yellow;
+                case FoodType.Blueberry:
+                    food = Color.Blue;
                     break;
                 case FoodType.Grape:
                     food = Color.Purple;
+                    break;
+                case FoodType.Lime:
+                    food = Color.Green;
                     break;
                 case FoodType.Orange:
                     food = Color.Orange;

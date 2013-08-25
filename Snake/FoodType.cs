@@ -16,14 +16,19 @@ namespace Snake
         Apple,
 
         /// <summary>
-        /// Specifies the <see cref="FoodBlock"/> as a yellow block.
+        /// Specifies the <see cref="FoodBlock"/> as a blue block.
         /// </summary>
-        Banana,
+        Blueberry,
 
         /// <summary>
         /// Specifies the <see cref="FoodBlock"/> as a purple block.
         /// </summary>
         Grape,
+
+        /// <summary>
+        /// Specifies the <see cref="FoodBlock"/> as a green block.
+        /// </summary>
+        Lime,
 
         /// <summary>
         /// Specifies the <see cref="FoodBlock"/> as an orange block.

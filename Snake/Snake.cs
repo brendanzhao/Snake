@@ -41,7 +41,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Gets or sets the SnakeBlocks of the <see cref="Snake"/>.
+        /// Gets the SnakeBlocks of the <see cref="Snake"/>.
         /// </summary>
         public LinkedList<SnakeBlock> SnakeBlocks
         {

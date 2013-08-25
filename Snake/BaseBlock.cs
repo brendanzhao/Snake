@@ -27,7 +27,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Gets or sets the PixelSize of the <see cref="BaseBlock"/>.
+        /// Gets the PixelSize of the <see cref="BaseBlock"/>.
         /// </summary>
         /// <returns>A <see cref="Size"/> representing the pixel width and height of the <see cref="BaseBlock" /> object.</returns>
         public Size PixelSize

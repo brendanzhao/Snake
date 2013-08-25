@@ -6,6 +6,7 @@
 namespace Snake
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -31,9 +32,19 @@ namespace Snake
         private Point direction;
 
         /// <summary>
+        /// Represents the empty positions on the grid where a new food block can be placed.
+        /// </summary>
+        private List<Point> emptyPositions;
+
+        /// <summary>
         /// Represents the food block that the <see cref="Snake"/> needs to eat in order to grow.
         /// </summary>
         private FoodBlock food;
+
+        /// <summary>
+        /// Represents the grid size of the snake game where each block represents one node. THIS IS NOT PIXEL SIZE.
+        /// </summary>
+        private Size gridSize;
 
         /// <summary>
         /// Represents the last direction the <see cref="Snake"/> moved in the previous tick in order to prevent moving backwards.
@@ -58,26 +69,28 @@ namespace Snake
             this.InitializeComponent();
             this.DoubleBuffered = true;
             this.gameTimer.Interval = 75;
+            this.gridSize = new Size(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
             this.difficultyBorder = new Rectangle(this.medium.Location.X, this.medium.Location.Y, this.medium.Size.Width, this.medium.Size.Height);
             this.state = GameState.Menu;
             this.Invalidate();
         }
 
         /// <summary>
-        /// Moves the snake depending on what direction is currently pressed.
+        /// Performs the main loop of game which is ran on every tick of the game timer.
         /// </summary>
         private void GameLoop()
         {
             if (SnakeUtility.WillEatFood(this.snake, this.food, this.direction))
             {
                 this.snake.Grow(this.snake.SnakeBlocks.Last.Value);
-                this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
+                this.emptyPositions = SnakeUtility.GetEmptyBlockPositions(this.snake, this.gridSize);
+                this.food = new FoodBlock(this.emptyPositions);
             }
 
             this.snake.Move(this.direction);
             this.previousDirection = this.direction;
 
-            if (SnakeUtility.HasCollidedWithSelf(this.snake) || SnakeUtility.HasHitBounds(this.snake, this.ClientSize.Width, this.ClientSize.Height))
+            if (SnakeUtility.HasCollidedWithSelf(this.snake) || SnakeUtility.HasHitBounds(this.snake, this.gridSize.Width, this.gridSize.Height) || this.emptyPositions.Count == 0)
             {
                 this.GameOver();
             }
@@ -182,7 +195,8 @@ namespace Snake
         {
             this.Controls.Clear();
             this.snake = new Snake(SnakeGame.DefaultSnakeLength);
-            this.food = new FoodBlock(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
+            this.emptyPositions = SnakeUtility.GetEmptyBlockPositions(this.snake, this.gridSize);
+            this.food = new FoodBlock(this.emptyPositions);
             this.direction = new Point(0, 1);
             this.state = GameState.Playing;
             this.Invalidate();

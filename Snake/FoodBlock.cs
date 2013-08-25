@@ -6,6 +6,7 @@
 namespace Snake
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
 
     /// <summary>
@@ -26,13 +27,12 @@ namespace Snake
         /// <summary>
         /// Initializes a new instance of the <see cref="FoodBlock"/> class with a specified Position and random <see cref="FoodType"/>.
         /// </summary>
-        /// <param name="horizontalBound">An <see cref="int"/> representing the maximum X position to place the <see cref="FoodBlock"/>.</param>
-        /// <param name="verticalBound">An <see cref="int"/> representing the maximum Y position to place the <see cref="FoodBlock"/>.</param>
-        public FoodBlock(int horizontalBound, int verticalBound)
+        /// <param name="availablePositions">A <see cref="List"/> of Points containing all possible positions.</param>
+        public FoodBlock(List<Point> availablePositions)
             : base()
         {
             this.FoodType = (FoodType)foodTypes.GetValue(random.Next(0, foodTypes.Length));
-            this.Position = new Point(FoodBlock.random.Next(0, horizontalBound), FoodBlock.random.Next(0, verticalBound));
+            this.Position = availablePositions[random.Next(0, availablePositions.Count)];
         }
 
         /// <summary>

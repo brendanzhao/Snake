@@ -15,6 +15,29 @@ namespace Snake
     public static class SnakeUtility
     {
         /// <summary>
+        /// Determines the empty positions on the game grid so that a new <see cref="FoodBlock"/> cannot be randomly placed on the existing <see cref="Snake"/>.
+        /// </summary>
+        /// <param name="snake">A <see cref="Snake"/> used indicate which positions are not available.</param>
+        /// <param name="gridSize">A <see cref="Size"/> representing the maximum positions on the game grid.</param>
+        /// <returns>A <see cref="List"/> of Points containing all empty positions on the game grid.</returns>
+        public static List<Point> GetEmptyBlockPositions(Snake snake, Size gridSize)
+        {
+            List<Point> emptyPositions = new List<Point>();
+
+            for (int i = 0; i < gridSize.Width * gridSize.Height; i++)
+            {
+                emptyPositions.Add(new Point(i % gridSize.Width, i / gridSize.Width));
+            }
+
+            foreach (SnakeBlock sb in snake.SnakeBlocks)
+            {
+                emptyPositions.Remove(sb.Position);
+            }
+
+            return emptyPositions;
+        }
+
+        /// <summary>
         /// Checks if snake has collided with itself.
         /// </summary>
         /// <param name="snake">A <see cref="Snake"/> being checked to for self collision.</param>
@@ -58,7 +81,7 @@ namespace Snake
             // The position of the head of the snake.
             Point snakeHead = snake.SnakeBlocks.First.Value.Position;
 
-            if (snakeHead.X < 0 || snakeHead.Y < 0 || (snakeHead.X * BaseBlock.StandardBlockSize.Width) >= horizontalBound || (snakeHead.Y * BaseBlock.StandardBlockSize.Height) >= verticalBound)
+            if (snakeHead.X < 0 || snakeHead.Y < 0 || snakeHead.X >= horizontalBound || snakeHead.Y >= verticalBound)
             {
                 return true;
             }

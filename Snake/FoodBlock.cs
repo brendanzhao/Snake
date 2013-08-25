@@ -38,10 +38,10 @@ namespace Snake
         /// <summary>
         /// Gets or sets the FoodType of the <see cref="FoodBlock"/>.
         /// </summary>
-        public FoodType FoodType
+        private FoodType FoodType
         {
-            private get;
-            private set;
+            get;
+            set;
         }
 
         /// <summary>

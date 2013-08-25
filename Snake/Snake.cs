@@ -6,9 +6,7 @@
 namespace Snake
 {
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Drawing;
-    using System.Linq;
 
     /// <summary>
     /// Represents the snake controlled by the user in the Snake game.

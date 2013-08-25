@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------
 namespace Snake
 {
-    using System;
     using System.Drawing;
 
     /// <summary>

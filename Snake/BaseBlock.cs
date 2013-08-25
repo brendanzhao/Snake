@@ -33,7 +33,7 @@ namespace Snake
         public Size PixelSize
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>

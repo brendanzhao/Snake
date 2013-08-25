@@ -14,7 +14,7 @@ namespace Snake
     public class FoodBlock : BaseBlock
     {
         /// <summary>
-        /// Represents a random number generator to position the <see cref="FoodBlock"/>randomly and be of a random <see cref="FoodType"/>.
+        /// Represents a random number generator to position the <see cref="FoodBlock"/> randomly and be of a random <see cref="FoodType"/>.
         /// </summary>
         private static Random random = new Random();
 
@@ -40,8 +40,8 @@ namespace Snake
         /// </summary>
         public FoodType FoodType
         {
-            get;
-            set;
+            private get;
+            private set;
         }
 
         /// <summary>

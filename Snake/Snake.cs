@@ -46,7 +46,7 @@ namespace Snake
         public LinkedList<SnakeBlock> SnakeBlocks
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>

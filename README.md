@@ -5,7 +5,7 @@ This is the classic Snake game I've decided to recreate during my spare time for
 The MSDN style commenting is unncessary however I felt like complying with all StyleCop formatting for this project.<br />
 
 Refactor TODO:<br />
-When a food block is eaten, add a new block to the end of the snake instead of replacing the food block as a new head.<br />
+All major refactoring TODO's have been completed.
 
 Features TODO:<br />
 Pause functionality.<br />

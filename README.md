@@ -5,7 +5,7 @@ This is the classic Snake game I've decided to recreate during my spare time for
 The MSDN style commenting is unncessary however I felt like complying with all StyleCop formatting for this project.<br />
 
 Bugs TODO:<br />
-Resizing window tends to mess some things up currently.
+All known bugs have been fixed.
 
 Refactor TODO:<br />
 All major refactor TODO's have been completed.

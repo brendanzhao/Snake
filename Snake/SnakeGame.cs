@@ -20,6 +20,11 @@ namespace Snake
         private const int DefaultSnakeLength = 5;
 
         /// <summary>
+        /// Represents the border drawn around the currently selected difficulty.
+        /// </summary>
+        private Rectangle difficultyBorder;
+
+        /// <summary>
         /// Represents the direction to move the <see cref="Snake"/>.
         /// </summary>
         /// <remarks>Should only ever hold values from -1 to 1.</remarks>
@@ -48,6 +53,7 @@ namespace Snake
             this.InitializeComponent();
             this.DoubleBuffered = true;
             this.gameTimer.Interval = 75;
+            this.difficultyBorder = new Rectangle(this.medium.Location.X, this.medium.Location.Y, this.medium.Size.Width, this.medium.Size.Height);
             this.state = GameState.Menu;
             this.Invalidate();
         }
@@ -89,6 +95,7 @@ namespace Snake
         private void Easy_Click(object sender, EventArgs e)
         {
             this.gameTimer.Interval = 100;
+            this.difficultyBorder = new Rectangle(this.easy.Location.X, this.easy.Location.Y, this.easy.Size.Width, this.easy.Size.Height);
             this.Refresh();
         }
 
@@ -100,6 +107,7 @@ namespace Snake
         private void Medium_Click(object sender, EventArgs e)
         {
             this.gameTimer.Interval = 75;
+            this.difficultyBorder = new Rectangle(this.medium.Location.X, this.medium.Location.Y, this.medium.Size.Width, this.medium.Size.Height);
             this.Refresh();
         }
 
@@ -111,6 +119,7 @@ namespace Snake
         private void Hard_Click(object sender, EventArgs e)
         {
             this.gameTimer.Interval = 50;
+            this.difficultyBorder = new Rectangle(this.hard.Location.X, this.hard.Location.Y, this.hard.Size.Width, this.hard.Size.Height);
             this.Refresh();
         }
 
@@ -122,6 +131,7 @@ namespace Snake
         private void Insane_Click(object sender, EventArgs e)
         {
             this.gameTimer.Interval = 25;
+            this.difficultyBorder = new Rectangle(this.insane.Location.X, this.insane.Location.Y, this.insane.Size.Width, this.insane.Size.Height);
             this.Refresh();
         }
 
@@ -135,11 +145,16 @@ namespace Snake
             // Draws to the form.
             Graphics g;
 
+            // Used to determine the colour being drawn to the form.
+            Pen pen;
+
             g = e.Graphics;
+            pen = new Pen(Color.Red);
 
             switch (this.state)
             {
                 case GameState.Menu:
+                    g.DrawRectangle(pen, this.difficultyBorder);
                     break;
                 case GameState.Playing:
                     this.snake.Draw(g);

@@ -1,16 +1,20 @@
-Snake
-=========
+##Snake
 
+####About
 This is the classic Snake game I've decided to recreate during my spare time for fun.<br />
-The MSDN style commenting is unncessary however I felt like complying with all StyleCop formatting for this project.<br />
+The code follows all StyleCop formatting standards.
 
-Bugs TODO:<br />
-All known bugs have been fixed.
+####Features
+There are four playable difficulties currently in the game of which only the speed currently is changed between difficulties.<br />
+If you do not like the default playing grid size, you can resize the application before clicking the "Start Game" button and the bounds will automatically update.<br />
 
-Refactor TODO:<br />
-All major refactor TODO's have been completed.
+####Bugs TODO
+All major known bugs have been fixed.
 
-Features TODO:<br />
+####Refactor TODO
+All major refactoring has been completed.
+
+####Features TODO:
 Pause functionality.<br />
 End game Functionality.<br />
 Add obstacles.<br />

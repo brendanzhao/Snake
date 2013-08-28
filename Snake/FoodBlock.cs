@@ -15,30 +15,30 @@ namespace Snake
     public class FoodBlock : BaseBlock
     {
         /// <summary>
+        /// Represents an array of all the colors the <see cref="FoodBlock"/> can be.
+        /// </summary>
+        private static Color[] colors = { Color.Red, Color.Orange, Color.Green, Color.Blue, Color.Purple };
+
+        /// <summary>
         /// Represents a random number generator to randomize the properties of the <see cref="FoodBlock"/>.
         /// </summary>
         private static Random random = new Random();
 
         /// <summary>
-        /// Represents an array of all the <see cref="FoodType"/> enumeration values.
-        /// </summary>
-        private static FoodType[] foodTypes = (FoodType[])Enum.GetValues(typeof(FoodType));
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FoodBlock"/> class with a random type and position.
+        /// Initializes a new instance of the <see cref="FoodBlock"/> class with a random color and position.
         /// </summary>
         /// <param name="availablePositions">A <see cref="List"/> of Points containing all possible positions.</param>
         public FoodBlock(List<Point> availablePositions)
             : base()
         {
-            this.FoodType = (FoodType)foodTypes.GetValue(random.Next(0, foodTypes.Length));
+            this.FoodColor = colors[random.Next(0, colors.Length)];
             this.Position = availablePositions[random.Next(0, availablePositions.Count)];
         }
 
         /// <summary>
         /// Gets or sets the FoodType of the <see cref="FoodBlock"/>.
         /// </summary>
-        private FoodType FoodType
+        private Color FoodColor
         {
             get;
             set;
@@ -50,31 +50,7 @@ namespace Snake
         /// <param name="g">A <see cref="Graphics"/> object which will be drawing to the Snake game.</param>
         public override void Draw(Graphics g)
         {
-            // The color of the food block to be drawn.
-            Color food;
-
-            switch (this.FoodType)
-            {
-                case FoodType.Apple:
-                    food = Color.Red;
-                    break;
-                case FoodType.Blueberry:
-                    food = Color.Blue;
-                    break;
-                case FoodType.Grape:
-                    food = Color.Purple;
-                    break;
-                case FoodType.Lime:
-                    food = Color.Green;
-                    break;
-                case FoodType.Orange:
-                    food = Color.Orange;
-                    break;
-                default:
-                    throw new ArgumentException("FoodBlocks should always have a type.");
-            }
-
-            g.FillRectangle(new SolidBrush(food), this.Position.X * this.PixelSize.Width, this.Position.Y * this.PixelSize.Height, this.PixelSize.Width, this.PixelSize.Height);
+            g.FillRectangle(new SolidBrush(this.FoodColor), this.Position.X * this.PixelSize.Width, this.Position.Y * this.PixelSize.Height, this.PixelSize.Width, this.PixelSize.Height);
         }
     }
 }

@@ -1,7 +1,7 @@
 ##Snake
 
 ####About
-This is the classic Snake game I've decided to recreate during my spare time for fun.<br />
+This is the classic Snake game I've decided to recreate during my spare time for fun. When you run the game, use the keyboard arrow keys to move the snake. Goodluck!<br />
 The code follows all StyleCop formatting standards.
 
 ####Features

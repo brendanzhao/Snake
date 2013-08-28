@@ -36,7 +36,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Gets or sets the FoodType of the <see cref="FoodBlock"/>.
+        /// Gets or sets the FoodColor of the <see cref="FoodBlock"/>.
         /// </summary>
         private Color FoodColor
         {

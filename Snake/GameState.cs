@@ -6,27 +6,27 @@
 namespace Snake
 {
     /// <summary>
-    /// Specifies the state that the Snake game is currently at.
+    /// Specifies the state that the game is currently in.
     /// </summary>
     public enum GameState
     {
         /// <summary>
-        /// Specifies that the game is currently displaying the menu.
+        /// Specifies that the menu is being displayed.
         /// </summary>
         Menu,
 
         /// <summary>
-        /// Specifies that the game is currently being played.
+        /// Specifies that the main game is being played.
         /// </summary>
         Playing,
 
         /// <summary>
-        /// Specifies that the game is currently paused.
+        /// Specifies that the game is paused.
         /// </summary>
         Pause,
 
         /// <summary>
-        /// Specifies that the game is currently at the end screen.
+        /// Specifies that the game is over.
         /// </summary>
         End
     }

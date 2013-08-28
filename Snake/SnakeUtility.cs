@@ -38,9 +38,9 @@ namespace Snake
         }
 
         /// <summary>
-        /// Checks if snake has collided with itself.
+        /// Checks if the <see cref="Snake"/> has collided with itself.
         /// </summary>
-        /// <param name="snake">A <see cref="Snake"/> being checked to for self collision.</param>
+        /// <param name="snake">A <see cref="Snake"/> being checked for self collision.</param>
         /// <returns>true if the snake has collided with itself; otherwise false.</returns>
         public static bool HasCollidedWithSelf(Snake snake)
         {
@@ -70,7 +70,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Checks if the snake has hit the boundaries of the game.
+        /// Checks if the <see cref="Snake"/> has hit the boundaries of the game.
         /// </summary>
         /// <param name="snake">A <see cref="Snake"/> being checked if it has past the bounds.</param>
         /// <param name="horizontalBound">A <see cref="int"/> representing the maximum x-bound that the snake can be at.</param>
@@ -92,7 +92,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Checks if the snake will eat a food block the next time it moves.
+        /// Checks if the <see cref="Snake"/> will eat a food block the next time it moves.
         /// </summary>
         /// <param name="snake">A <see cref="Snake"/> being checked if it will eat a food block.</param>
         /// <param name="food">A <see cref="FoodBlock"/> being checked if it will be eaten.</param>
@@ -114,9 +114,9 @@ namespace Snake
         }
 
         /// <summary>
-        /// Determines the direction to move the snake depending on the key pressed.
+        /// Determines the direction to move the <see cref="Snake"/> depending on the key pressed.
         /// </summary>
-        /// <param name="previousDirection">A <see cref="Point"/> representing the direction the snake was previously moving to not allow the <see cref="Snake"/> to move backwards.</param>
+        /// <param name="previousDirection">A <see cref="Point"/> representing the previous direction of the <see cref="Snake"/> used to deny backwards movement.</param>
         /// <param name="key">A <see cref="Keys"/> enumeration representing the key pressed.</param>
         /// <returns>A <see cref="Point"/> representing the new direction the <see cref="Snake"/> will move towards.</returns>
         public static Point ChangeDirection(Point previousDirection, Keys key)

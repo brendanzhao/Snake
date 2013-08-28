@@ -8,14 +8,14 @@ namespace Snake
     using System.Drawing;
 
     /// <summary>
-    /// Represents a single block of the Snake controlled by the user.
+    /// Represents a single block of the snake controlled by the user.
     /// </summary>
     public class SnakeBlock : BaseBlock
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SnakeBlock"/> class.
         /// </summary>
-        /// /// <param name="position">A <see cref="Point"/> representing the position of the <see cref="SnakeBlock"/> on the screen.</param>
+        /// <param name="position">A <see cref="Point"/> representing the position of the <see cref="SnakeBlock"/> on the screen.</param>
         public SnakeBlock(Point position)
             : base()
         {

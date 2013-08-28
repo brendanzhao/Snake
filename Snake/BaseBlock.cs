@@ -9,7 +9,7 @@ namespace Snake
     using System.Drawing;
 
     /// <summary>
-    /// Represents a basic block in the Snake game.
+    /// Represents a basic block in the game.
     /// </summary>
     public class BaseBlock
     {

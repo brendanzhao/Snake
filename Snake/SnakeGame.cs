@@ -42,8 +42,9 @@ namespace Snake
         private FoodBlock food;
 
         /// <summary>
-        /// Represents the grid size of the snake game where each block represents one node. THIS IS NOT PIXEL SIZE.
+        /// Represents the grid size of the snake game where each block represents one node.
         /// </summary>
+        /// <remarks>THIS IS NOT PIXEL SIZE.</remarks>
         private Size gridSize;
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Stops the game of the Snake.
+        /// Stops the game.
         /// </summary>
         private void GameOver()
         {
@@ -204,7 +205,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Event which is used to control the game loop to keep moving the snake.
+        /// Event which is used to control the game loop to keep moving the <see cref="Snake"/>.
         /// </summary>
         /// <param name="sender">An <see cref="object"/> representing the source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
@@ -215,7 +216,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Event which is used to determine the direction to move the snake.
+        /// Event which is used to determine the direction to move the <see cref="Snake"/>.
         /// </summary>
         /// <param name="sender">An <see cref="object"/> representing the source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>

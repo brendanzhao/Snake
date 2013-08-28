@@ -10,12 +10,12 @@ namespace Snake
     using System.Drawing;
 
     /// <summary>
-    /// Represents a piece of food on the Snake game which can be eaten.
+    /// Represents a piece of food on the Snake game to be eaten.
     /// </summary>
     public class FoodBlock : BaseBlock
     {
         /// <summary>
-        /// Represents a random number generator to position the <see cref="FoodBlock"/> randomly and be of a random <see cref="FoodType"/>.
+        /// Represents a random number generator to randomize the properties of the <see cref="FoodBlock"/>.
         /// </summary>
         private static Random random = new Random();
 
@@ -25,7 +25,7 @@ namespace Snake
         private static FoodType[] foodTypes = (FoodType[])Enum.GetValues(typeof(FoodType));
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FoodBlock"/> class with a specified Position and random <see cref="FoodType"/>.
+        /// Initializes a new instance of the <see cref="FoodBlock"/> class with a random type and position.
         /// </summary>
         /// <param name="availablePositions">A <see cref="List"/> of Points containing all possible positions.</param>
         public FoodBlock(List<Point> availablePositions)

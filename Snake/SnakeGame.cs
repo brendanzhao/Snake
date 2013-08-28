@@ -82,7 +82,7 @@ namespace Snake
         {
             if (SnakeUtility.WillEatFood(this.snake, this.food, this.direction))
             {
-                this.snake.Grow(this.snake.SnakeBlocks.Last.Value);
+                this.snake.Grow();
                 this.emptyPositions = SnakeUtility.GetEmptyBlockPositions(this.snake, this.gridSize);
                 this.food = new FoodBlock(this.emptyPositions);
             }

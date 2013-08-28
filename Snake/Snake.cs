@@ -39,10 +39,9 @@ namespace Snake
         /// <summary>
         /// Increases the length of the <see cref="Snake"/> by one.
         /// </summary>
-        /// <param name="snakeBlock">A <see cref="SnakeBlock"/> to be added to the end of the <see cref="Snake"/>.</param>
-        public void Grow(SnakeBlock snakeBlock)
+        public void Grow()
         {
-            this.SnakeBlocks.AddLast(snakeBlock);
+            this.SnakeBlocks.AddLast(this.SnakeBlocks.Last.Value);
         }
 
         /// <summary>

@@ -21,6 +21,11 @@ namespace Snake
         private const int DefaultSnakeLength = 5;
 
         /// <summary>
+        /// Represents whether or not the game can be restarted.
+        /// </summary>
+        private bool canRestart = false;
+
+        /// <summary>
         /// Represents the border drawn around the currently selected difficulty.
         /// </summary>
         private Rectangle difficultyBorder;
@@ -40,6 +45,11 @@ namespace Snake
         /// Represents the food block that the <see cref="Snake"/> needs to eat in order to grow.
         /// </summary>
         private FoodBlock food;
+
+        /// <summary>
+        /// Represents the object drawing to the form.
+        /// </summary>
+        private Graphics g;
 
         /// <summary>
         /// Represents the grid size of the snake game where each block represents one node.
@@ -80,6 +90,11 @@ namespace Snake
         /// </summary>
         private void GameLoop()
         {
+            if (this.direction.X == 0 && this.direction.Y == 0)
+            {
+                return;
+            }
+
             if (SnakeUtility.WillEatFood(this.snake, this.food, this.direction))
             {
                 this.snake.Grow();
@@ -101,7 +116,35 @@ namespace Snake
         /// </summary>
         private void GameOver()
         {
+            // Displays a replay text when the game is over.
+            Label replay;
+
             this.gameTimer.Enabled = false;
+            this.canRestart = true;
+
+            replay = new Label();
+            replay.Text = "Press Space to Play Again";
+            replay.AutoSize = true;
+            replay.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, FontStyle.Regular, GraphicsUnit.Point, (byte)0);
+            replay.Left = (this.ClientSize.Width - replay.PreferredWidth) / 2;
+            replay.Top = (this.ClientSize.Height - replay.PreferredHeight) / 2;
+            this.Controls.Add(replay);
+        }
+
+        /// <summary>
+        /// Creates/Recreates the game and then starts it.
+        /// </summary>
+        private void NewGame()
+        {
+            this.Controls.Clear();
+            this.gridSize = new Size(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
+            this.snake = new Snake(SnakeGame.DefaultSnakeLength);
+            this.emptyPositions = SnakeUtility.GetEmptyBlockPositions(this.snake, this.gridSize);
+            this.food = new FoodBlock(this.emptyPositions);
+            this.direction = new Point(0, 1);
+            this.state = GameState.Playing;
+            this.Invalidate();
+            this.gameTimer.Enabled = true;
         }
 
         /// <summary>
@@ -159,23 +202,16 @@ namespace Snake
         /// <param name="e">An <see cref="PaintEventArgs"/> containing the event data.</param>
         private void GameBoard_Paint(object sender, PaintEventArgs e)
         {
-            // Draws to the form.
-            Graphics g;
-
-            // Used to determine the colour being drawn to the form.
-            Pen pen;
-
-            g = e.Graphics;
-            pen = new Pen(Color.Red);
+            this.g = e.Graphics;
 
             switch (this.state)
             {
                 case GameState.Menu:
-                    g.DrawRectangle(pen, this.difficultyBorder);
+                    this.g.DrawRectangle(new Pen(Color.Red), this.difficultyBorder);
                     break;
                 case GameState.Playing:
-                    this.snake.Draw(g);
-                    this.food.Draw(g);
+                    this.snake.Draw(this.g);
+                    this.food.Draw(this.g);
                     break;
                 case GameState.Pause:
                     break;
@@ -187,21 +223,13 @@ namespace Snake
         }
 
         /// <summary>
-        /// Event which clears the menu and starts the game of Snake.
+        /// Event which starts the game of Snake.
         /// </summary>
         /// <param name="sender">An <see cref="object"/> representing the source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
         private void NewGame_Click(object sender, EventArgs e)
         {
-            this.Controls.Clear();
-            this.gridSize = new Size(this.ClientSize.Width / BaseBlock.StandardBlockSize.Width, this.ClientSize.Height / BaseBlock.StandardBlockSize.Height);
-            this.snake = new Snake(SnakeGame.DefaultSnakeLength);
-            this.emptyPositions = SnakeUtility.GetEmptyBlockPositions(this.snake, this.gridSize);
-            this.food = new FoodBlock(this.emptyPositions);
-            this.direction = new Point(0, 1);
-            this.state = GameState.Playing;
-            this.Invalidate();
-            this.gameTimer.Enabled = true;
+            this.NewGame();
         }
 
         /// <summary>
@@ -222,7 +250,15 @@ namespace Snake
         /// <param name="e">An <see cref="EventArgs"/> containing the event data.</param>
         private void SnakeGame_KeyDown(object sender, KeyEventArgs e)
         {
-            this.direction = SnakeUtility.ChangeDirection(this.previousDirection, e.KeyData);
+            if (this.canRestart && e.KeyData == Keys.Space)
+            {
+                this.canRestart = false;
+                this.NewGame();
+            }
+            else
+            {
+                this.direction = SnakeUtility.ChangeDirection(this.direction, this.previousDirection, e.KeyData);
+            }
         }
     }
 }

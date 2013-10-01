@@ -116,10 +116,11 @@ namespace Snake
         /// <summary>
         /// Determines the direction to move the <see cref="Snake"/> depending on the key pressed.
         /// </summary>
+        /// <param name="currentDirection">A <see cref="Point"/> representing the current direction the <see cref="Snake"/> used exit pause mode.</param>
         /// <param name="previousDirection">A <see cref="Point"/> representing the previous direction of the <see cref="Snake"/> used to deny backwards movement.</param>
         /// <param name="key">A <see cref="Keys"/> enumeration representing the key pressed.</param>
         /// <returns>A <see cref="Point"/> representing the new direction the <see cref="Snake"/> will move towards.</returns>
-        public static Point ChangeDirection(Point previousDirection, Keys key)
+        public static Point ChangeDirection(Point currentDirection, Point previousDirection, Keys key)
         {
             switch (key)
             {
@@ -152,10 +153,22 @@ namespace Snake
 
                     break;
                 case Keys.Space:
-                    // TODO: Implement pause function
-                    break;
+                    if (currentDirection.X == 0 && currentDirection.Y == 0)
+                    {
+                        return previousDirection;
+                    }
+                    else
+                    {
+                        return new Point(0, 0);
+                    }
+
                 default:
                     break;
+            }
+
+            if (currentDirection.X == 0 && currentDirection.Y == 0)
+            {
+                return currentDirection;
             }
 
             return previousDirection;

@@ -119,8 +119,8 @@ namespace Snake
             this.KeyPreview = true;
             this.Name = "SnakeGame";
             this.Text = "BZow\'s Snake";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SnakeGame_KeyDown);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameBoard_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SnakeGame_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
